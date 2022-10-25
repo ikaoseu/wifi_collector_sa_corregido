@@ -13,7 +13,7 @@ void print_all()
 {
     for (int i = 0; i < count_v; i++)
     {
-        printf("\n%i %s %s %s %i %s %i %s %s\n",
+        printf("\n%s %s %s %s %s %s %s %s %s\n",
                 conn_array[i].cell_num, conn_array[i].mac,
                 conn_array[i].essid, conn_array[i].mode,
                 conn_array[i].channel, conn_array[i].en_key,

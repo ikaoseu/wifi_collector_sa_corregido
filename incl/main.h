@@ -9,13 +9,13 @@ int menu_int;
 
 typedef struct connections
 {
-    int cell_num;
+    char cell_num[MAX_STRING_SIZE];
     char mac[MAX_STRING_SIZE];
     char essid[MAX_STRING_SIZE];
     char mode[MAX_STRING_SIZE];
-    int channel;
+    char channel[MAX_STRING_SIZE];
     char en_key[MAX_STRING_SIZE];
-    int quality;
+    char quality[MAX_STRING_SIZE];
     char freq[MAX_STRING_SIZE];
     char signal_l[MAX_STRING_SIZE];
 } connection_t;

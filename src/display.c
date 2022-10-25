@@ -34,15 +34,15 @@ void print_cell()
     
     for(int i = 0; i < LINE_SIZE; i++)
     {
-        if(conn_array[i].cell_num == num_of_cell)
+        if(atoi(conn_array[i].cell_num) == num_of_cell)
         {
-            printf("\n%i %s %s %s %i %s %i %s %s\n", conn_array[i].cell_num,
+            printf("\n%s %s %s %s %s %s %s %s %s\n", conn_array[i].cell_num,
                     conn_array[i].mac, conn_array[i].essid, conn_array[i].mode, 
                     conn_array[i].channel, conn_array[i].en_key,conn_array[i].quality, 
                     conn_array[i].freq, conn_array[i].signal_l);
         }
 
-        if(conn_array[i].cell_num != num_of_cell)
+        if(atoi(conn_array[i].cell_num) != num_of_cell)
         {
             count_v++;
         }

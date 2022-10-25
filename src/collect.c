@@ -5,7 +5,10 @@
 #include "../incl/collect.h"
 #include "../incl/main.h"
 
+//printf("%s", buffer);
+
 extern char file_name[];
+int counter = 0;
 
 int cell_num;
 //this function is for choosing the cell we want to collect, 
@@ -28,6 +31,7 @@ int choose_cell()
             printf("Please enter a valid number for the cell. (1-21)");
             scanf("%d", &cell_num);
         }
+        return cell_num;
     }
     return 0; //error
 }
@@ -43,12 +47,13 @@ void cell_collect(char file_name[])
     //string to char
     sprintf(final_cell, "%i", pick );  
 
-    //javawise nme_funcion("info_cell_"+pick+".txt")
+    
 
     //Concatenating strings together to form the filename
     //file_name declared in .h
     strcat(file_name, final_cell);
     strcat(file_name, ".txt");
+    
 
     read_cell(file_name);
 
@@ -60,7 +65,6 @@ void cell_collect(char file_name[])
     case 'y':
     case 'Y':
         cell_collect(file_name);
-
     case 'n':
     case 'N':
         system("clear");
@@ -79,10 +83,24 @@ void cell_collect(char file_name[])
 void read_cell(char file_name[MAX_STRING_SIZE])
 {
 
-    int index = 0;
-
+    //int index = 0;
+    char buffer[LINE_SIZE];
     FILE * cell_file = fopen(file_name, "r");
 
+    if(!cell_file){
+        printf("No se ha podido leer el archivo");
+    }else{
+        for(int i=0; i<9; i++){
+            if(fgets(buffer, LINE_SIZE, cell_file)){
+                
+                stacker(buffer);
+                counter++;
+            }
+        }
+
+    }
+
+/*
   //  int cell_num;
     char mac[LINE_SIZE];
     char essid[LINE_SIZE];
@@ -105,17 +123,69 @@ void read_cell(char file_name[MAX_STRING_SIZE])
             put_connection_to_struct(cell_num, mac, essid, mode, channel, 
             en_key, quality, freq, signal_l);
         }
+        
         fclose(cell_file);
     }
+    */
 }
 
-// This function puts the data obtained from file info_cell_NN into the struct
+void stacker (char buffer[]){
 
+       switch(counter) {
+
+            case 0  :
+                strcpy(conn_array[0].cell_num, buffer);
+            break; /* optional */
+	
+            case 1  :
+                strcpy(conn_array[0].mac, buffer);
+            break; /* optional */
+
+            case 2  :
+                strcpy(conn_array[0].essid, buffer);
+            break; /* optional */
+
+            case 3  :
+                strcpy(conn_array[0].mode, buffer);
+            break; /* optional */
+
+            case 4  :
+                strcpy(conn_array[0].channel, buffer);
+            break; /* optional */
+
+            case 5  :
+                strcpy(conn_array[0].en_key, buffer);
+            break; /* optional */
+
+            case 6  :
+                strcpy(conn_array[0].quality, buffer);
+            break; /* optional */
+
+            case 7  :
+                strcpy(conn_array[0].freq, buffer);
+            break; /* optional */
+
+            case 8  :
+                strcpy(conn_array[0].signal_l, buffer);
+            break; /* optional */
+
+       }
+}
+
+
+
+
+
+
+
+
+// This function puts the data obtained from file info_cell_NN into the struct
+/*
 void put_connection_to_struct(int cell_num, char mac[MAX_STRING_SIZE], char essid[MAX_STRING_SIZE],
                         char mode[MAX_STRING_SIZE], int channel, char en_key[MAX_STRING_SIZE],
                         char quality, char freq[MAX_STRING_SIZE], char signal_l[MAX_STRING_SIZE])
 {
-    int index = 0;
+    int index = 1;
 
     if(index < ARRAY_SIZE)
     {
@@ -141,3 +211,4 @@ void put_connection_to_struct(int cell_num, char mac[MAX_STRING_SIZE], char essi
         printf("Error: the array is full and it can not store further conn_array, to reset the storage please restart the program");
     }
 }
+*/
