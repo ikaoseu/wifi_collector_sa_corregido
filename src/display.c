@@ -5,57 +5,16 @@
 #include "../incl/display.h"
 #include "../incl/main.h"
 
+
+
 // this function prints the information in the cell
+ void print_cell(){
+      char y_n;
+      printer();   
 
-void print_cell()
-{
-    int num_of_cell;
-    char input_of_String[20];
-    int count_v = 0;
-    char y_n;
-
-    printf("Indicate the number of the cell for which you want to know its information (1 - 21):");
-
-    do
-    {
-        scanf("%s\n", input_of_String);
-        getchar();
-
-        num_of_cell = atoi(input_of_String);
-
-        if (num_of_cell<1 || num_of_cell>21)
-        {
-            printf("\nError: please enter a number between 1 and 21 (both included)");
-            break;
-        }
-        
-
-    } while (num_of_cell < 1 || num_of_cell > 21);
-    
-    for(int i = 0; i < LINE_SIZE; i++)
-    {
-        if(atoi(conn_array[i].cell_num) == num_of_cell)
-        {
-            printf("\n%s %s %s %s %s %s %s %s %s\n", conn_array[i].cell_num,
-                    conn_array[i].mac, conn_array[i].essid, conn_array[i].mode, 
-                    conn_array[i].channel, conn_array[i].en_key,conn_array[i].quality, 
-                    conn_array[i].freq, conn_array[i].signal_l);
-        }
-
-        if(atoi(conn_array[i].cell_num) != num_of_cell)
-        {
-            count_v++;
-        }
-
-        if(count_v == 80)
-        {
-            printf("\nScan the cell first, you can do this by pressing number 2 in th main menu\n");
-            break;
-        }
-
-        printf("Do you want to print the information of another cell? [y/N]:");
+      printf("Do you want to print the information of another cell? [y/N]:");
         scanf("%s", &y_n);
-
+        
         switch (y_n)
         {
             case 'y':
@@ -64,6 +23,7 @@ void print_cell()
 
             case 'n':
             case 'N':
+            system("clear");
                 break;
 
             default:
@@ -71,8 +31,57 @@ void print_cell()
                 system("clear");
                 break;
         }
+        
+        
+    }
+    
+
+
+
+    void printer(){
+
+        char input_of_String[MAX_STRING_SIZE];
+        int count_v = 0;
+        
+        char cell_name[20] = {"Cell "};
+        int value;
+
+        int picker = choose_cell();
+   
+       //int to string
+        sprintf(input_of_String, "%i", picker); 
+        strcat(cell_name, input_of_String);
+
+        for(int i = 0; i < LINE_SIZE; i++)
+        {        
+        value = checker(i, cell_name);
+        if(value == strlen(cell_name))
+        {
+            printf("\n%s %s %s %s %s %s %s %s %s\n", conn_array[i].cell_num,
+                    conn_array[i].mac, conn_array[i].essid, conn_array[i].mode, 
+                    conn_array[i].channel, conn_array[i].en_key,conn_array[i].quality, 
+                    conn_array[i].freq, conn_array[i].signal_l);
+        }else{
+            count_v++;
+            if(count_v == 80)
+            {
+                printf("\nScan the cell first, you can do this by pressing number 2 in th main menu\n");
+            break;
+            }
+        }
+    }
     }
 
+    int checker(int iterator, char cell_name[]){
+        int counter3 = 0;
+        //we check the whole name of the pos array so we can state if it matches
+        for(int j=0; j<strlen(conn_array[iterator].cell_num); j++){
+            if(conn_array[iterator].cell_num[j] == cell_name[j]){
+                counter3++;
+            }
+        }
+        return counter3;
+        
+    }
 
-}
-
+    

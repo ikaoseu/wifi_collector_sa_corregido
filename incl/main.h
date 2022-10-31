@@ -31,5 +31,5 @@ struct connections conn_array[ARRAY_SIZE];
 //hay que crear una funcion que saque lo leido de un file y lo meta en un struct
 
 void print_menu();
-
+int choose_cell();
 #endif

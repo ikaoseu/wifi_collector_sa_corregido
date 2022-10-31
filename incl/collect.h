@@ -1,8 +1,7 @@
 #ifndef COLLECT_H
 #define COLLECT_H
 
-void cell_collect(char file_name[]);
-int choose_cell();
+void cell_collect();
 int get_input_num();
 void read_cell(char file_name[]);
 void stacker (char buffer[]);

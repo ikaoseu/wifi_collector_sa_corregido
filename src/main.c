@@ -7,7 +7,10 @@
 #include "../incl/display_all.h"
 #include "../incl/display.h"
 
-char file_name[20] = {"../files/info_cell_"};
+
+
+int cell_num;
+
 
 int main()
 {
@@ -27,10 +30,13 @@ int main()
             quit(response);
             break;
         case 2: 
-            cell_collect(file_name);
+            cell_collect();
             break;
         case 10:
-            
+            print_cell();
+            break;
+        case 11:
+            break;    
         default:
             printf("At this moment this functionality is not available.\n\n");
             break ;
@@ -55,4 +61,30 @@ void print_menu()
     printf("[10] wificollector_display\n");
     printf("[11] wificollector_display_all\n");
     printf("Option: ");
+}
+
+
+//this function is for choosing the cell we want to collect, 
+// it only works if a number within 1-21 is entered, if not
+// it will ask you to enter a valid number (1-21)
+
+int choose_cell()
+{
+
+    printf("What cell do you want to focus? (1 - 21):");
+    scanf("%d", &cell_num);
+    if(cell_num >= 1 && cell_num <= 21)
+    {
+        return cell_num;
+    } 
+    else 
+    {
+        while(cell_num <= 0 || cell_num >= 22)
+        {
+            printf("Please enter a valid number for the cell. (1-21)");
+            scanf("%d", &cell_num);
+        }
+        return cell_num;
+    }
+    return 0; //error
 }

@@ -9,6 +9,8 @@ int count_v;
 
 //this function prints the connection array with all its information
 
+// prints the info of all cells
+
 void print_all()
 {
     for (int i = 0; i < count_v; i++)
@@ -22,3 +24,4 @@ void print_all()
 
     }
 }
+
